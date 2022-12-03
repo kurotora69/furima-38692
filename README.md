@@ -10,7 +10,9 @@
 ｜nickname           | text   | null: false               |
 ｜first_name         | text   | null: false               |
 ｜last_name          | text   | null: false               |
-｜birthday           | text   | null: false               |
+｜first_name_read    | text   | null: false               |
+｜last_name_read     | text   | null: false               |
+｜birthday           | date   | null: false               |
 
 has_many :items
 has_many :users_items
@@ -20,16 +22,15 @@ has_many :users_items
 
 ｜Colum              | Type       | Options                        |
 ｜-------------------|------------|--------------------------------|
-｜item               | string     | null: false                    |
-｜image              | string     | null: false                    |
-｜category           | text       | null: false                    |
-｜detail             | text       | null: false                    |
-｜delivery_charge    | text       | null: false                    |
-｜area               | text       | null: false                    |
-｜number_days        | text       | null: false                    |
-｜price              | text       | null: false                    |
-｜explanation        | string     | null: false                    |
-｜nickname           | references | null: false, foreign_key: true |
+｜item_name          | string     | null: false                    |
+｜category_id        | integer    | null: false                    |
+｜detail_id          | integer    | null: false                    |
+｜delivery_charge_id | integer    | null: false                    |
+｜prefectures_id     | integer    | null: false                    |
+｜number_days_id     | integer    | null: false                    |
+｜price              | integer    | null: false                    |
+｜explanation        | text       | null: false                    |
+｜user               | references | null: false, foreign_key: true |
 
 belongs_to :user
 has_one :users_item
@@ -39,7 +40,7 @@ has_one :users_item
 
 ｜Colum              | Type       | Options                        |
 ｜-------------------|------------|--------------------------------|
-｜nickname           | references | null: false, foreign_key: true | 
+｜user               | references | null: false, foreign_key: true | 
 ｜item               | references | null: false                    |
 
 belongs_to :user
@@ -52,14 +53,14 @@ has_one :users_address
 ｜Colum              | Type       | Options                        |
 ｜-------------------|------------|--------------------------------|
 ｜post_code          | string     | null: false                    |
-｜prefectures        | string     | null: false                    |
-｜city               | text       | null: false                    |
-｜address            | text       | null: false                    |
-｜tel                | text       | null: false                    |
+｜prefectures_id     | integer    | null: false                    |
+｜city               | string     | null: false                    |
+｜address            | string     | null: false                    |
+｜tel                | string     | null: false                    |
 ｜building           | text       |                                |
-｜nickname           | references | null: false, foreign_key: true |
+｜users_item         | references | null: false, foreign_key: true |
 
-belongs_to users_items
+belongs_to :users_item
 
 
 
