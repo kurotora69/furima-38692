@@ -7,11 +7,11 @@
 ｜-------------------|--------|---------------------------|
 ｜email              | string | null: false, unique: true |
 ｜encrypted_password | string | null: false               |
-｜nickname           | text   | null: false               |
-｜first_name         | text   | null: false               |
-｜last_name          | text   | null: false               |
-｜first_name_read    | text   | null: false               |
-｜last_name_read     | text   | null: false               |
+｜nickname           | string | null: false               |
+｜first_name         | string | null: false               |
+｜last_name          | string | null: false               |
+｜first_name_read    | string | null: false               |
+｜last_name_read     | string | null: false               |
 ｜birthday           | date   | null: false               |
 
 has_many :items
@@ -41,7 +41,7 @@ has_one :users_item
 ｜Colum              | Type       | Options                        |
 ｜-------------------|------------|--------------------------------|
 ｜user               | references | null: false, foreign_key: true | 
-｜item               | references | null: false                    |
+｜item               | references | null: false, foreign_key: true |
 
 belongs_to :user
 belongs_to :item
@@ -57,7 +57,7 @@ has_one :users_address
 ｜city               | string     | null: false                    |
 ｜address            | string     | null: false                    |
 ｜tel                | string     | null: false                    |
-｜building           | text       |                                |
+｜building           | string     |                                |
 ｜users_item         | references | null: false, foreign_key: true |
 
 belongs_to :users_item
