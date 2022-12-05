@@ -11,9 +11,8 @@ RSpec.describe User, type: :model do
         expect(@user).to be_valid
       end
     end
-    
-    context '新規登録できないとき' do
 
+    context '新規登録できないとき' do
       it 'nicknameが空では登録できない' do
         @user.nickname = ''
         @user.valid?
@@ -38,7 +37,7 @@ RSpec.describe User, type: :model do
         expect(@user.errors.full_messages).to include("First name can't be blank")
       end
 
-      it 'last_nameが空では登録できない' do 
+      it 'last_nameが空では登録できない' do
         @user.last_name = ''
         @user.valid?
         expect(@user.errors.full_messages).to include("Last name can't be blank")
@@ -46,7 +45,7 @@ RSpec.describe User, type: :model do
 
       it 'first_name_readが空では登録できない' do
         @user.first_name_read = ''
-        @user.valid? 
+        @user.valid?
         expect(@user.errors.full_messages).to include("First name read can't be blank")
       end
 
@@ -60,7 +59,7 @@ RSpec.describe User, type: :model do
         @user.birthday = ''
         @user.valid?
         expect(@user.errors.full_messages).to include("Birthday can't be blank")
-      end  
+      end
 
       it 'passwordとpassword_confirmationが不一致では登録できない' do
         @user.password = '123456'
@@ -74,48 +73,73 @@ RSpec.describe User, type: :model do
         another_user = FactoryBot.build(:user)
         another_user.email = @user.email
         another_user.valid?
-        expect(another_user.errors.full_messages).to include("Email has already been taken")
+        expect(another_user.errors.full_messages).to include('Email has already been taken')
       end
 
       it 'emailは@を含まないと登録できない' do
         @user.email = 'testmail'
         @user.valid?
-        expect(@user.errors.full_messages).to include("Email is invalid")
+        expect(@user.errors.full_messages).to include('Email is invalid')
       end
-        
+
       it 'passwordが5文字以下では登録できない' do
         @user.password = '00aaa'
         @user.password_confirmation = '00aaa'
         @user.valid?
-        expect(@user.errors.full_messages).to include("Password is too short (minimum is 6 characters)")
+        expect(@user.errors.full_messages).to include('Password is too short (minimum is 6 characters)')
       end
 
       it 'passwordが129文字以上では登録できない' do
         @user.password = Faker::Internet.password(min_length: 129)
         @user.password_confirmation = @user.password
         @user.valid?
-        expect(@user.errors.full_messages).to include("Password is too long (maximum is 128 characters)")
+        expect(@user.errors.full_messages).to include('Password is too long (maximum is 128 characters)')
       end
 
-      it '英字のみのパスワードは登録できない'
+      it '英字のみのパスワードは登録できない' do
+        @user.password = 'aaaaaaa'
+        @user.password_confirmation = 'aaaaaaa'
+        @user.valid?
+        expect(@user.errors.full_messages).to include('Password には英字と数字の両方を含めて設定してください')
       end
 
-      it '数字のみのパスワードでは登録できない'
+      it '数字のみのパスワードでは登録できない' do
+        @user.password = '1111111'
+        @user.password_confirmation = '1111111'
+        @user.valid?
+        expect(@user.errors.full_messages).to include('Password には英字と数字の両方を含めて設定してください')
       end
 
-      it '全角文字を含むパスワードでは登録できない'
+      it '全角文字を含むパスワードでは登録できない' do
+        @user.password = 'ああaaaああ'
+        @user.password_confirmation = 'ああaaaああ'
+        @user.valid?
+        expect(@user.errors.full_messages).to include('Password には英字と数字の両方を含めて設定してください')
       end
 
-      it '苗字（全角）に半角文字が含まれていると登録できない'
+      it '苗字（全角）に半角文字が含まれていると登録できない' do
+        @user.last_name_read = 'aaああ'
+        @user.valid?
+        expect(@user.errors.full_messages).to include('Last name read is invalid')
       end
 
-      it '名前（全角）に半角文字が含まれていると登録できない'
+      it '苗字（カナ）にカタカナ以外の文字（平仮名・漢字・英数字・記号）が含まれていると登録できない' do
+        @user.last_name_read = 'あ亜a0@'
+        @user.valid?
+        expect(@user.errors.full_messages).to include('Last name read is invalid')
       end
 
-      it '苗字（カナ）にカタカナ以外の文字（平仮名・漢字・英数字・記号）が含まれていると登録できない'
+      it '名前（全角）に半角文字が含まれていると登録できない' do
+        @user.first_name = 'aaああ'
+        @user.valid?
+        expect(@user.errors.full_messages).to include('First name is invalid')
       end
 
-      it '名前（カナ）にカタカナ以外の文字（平仮名・漢字・英数字・記号）が含まれていると登録できない'
+      it '名前（カナ）にカタカナ以外の文字（平仮名・漢字・英数字・記号）が含まれていると登録できない' do
+        @user.first_name = 'あ亜a0@'
+        @user.valid?
+        expect(@user.errors.full_messages).to include('First name is invalid')
+      end
     end
   end
-end  
+end
