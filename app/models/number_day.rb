@@ -1,0 +1,2 @@
+class NumberDay < ApplicationRecord
+end
