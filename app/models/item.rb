@@ -8,4 +8,14 @@ class Item < ApplicationRecord
   belongs_to :number_day
   belongs_to :prefecture
 
+  validates :item_name,          presence: true
+  validates :category_id,        numericality: { other_than: 1 , message: "can't be blank"}
+  validates :detail_id,          numericality: { other_than: 1 , message: "can't be blank"}
+  validates :delivery_charge_id, numericality: { other_than: 1 , message: "can't be blank"}
+  validates :number_day_id,      numericality: { other_than: 1 , message: "can't be blank"}
+  validates :price,              presence: true
+  validates :prefecture_id,      numericality: { other_than: 1 , message: "can't be blank"}
+  validates :explanation,        presence: true
+  validates :user,               presence: true
+
 end
