@@ -27,6 +27,7 @@
  | delivery_charge_id  | integer      | null: false                    |
  | number_day_id       | integer      | null: false                    |
  | price               | integer      | null: false                    |
+ | prefecture_id       | integer      | null: false                    |
  | explanation         | text         | null: false                    |
  | user                | references   | null: false, foreign_key: true |
 
