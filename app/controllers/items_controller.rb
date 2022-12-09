@@ -2,12 +2,10 @@ class ItemsController < ApplicationController
   before_action :authenticate_user!, except: [:index ]
 
   def index
-    @user = User.new
   end
 
   def new
     @item = Item.new
-    @user = User.new
   end
   
   def create
@@ -28,6 +26,4 @@ class ItemsController < ApplicationController
 
 end
 
-    # @user = User.find(params[:user_id])
-    # @item = @user.items.new(item_params)
-    # @item = Item.new(item_params)
+   
