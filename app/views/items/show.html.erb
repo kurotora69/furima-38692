@@ -29,9 +29,8 @@
     <%# <% if 'ユーザーがログインしている 且つ 商品が出品中である(あとで追加)' %> 
     <% if user_signed_in? %> 
       <% if  current_user.id == @item.user_id %> 
-        <%# <% if '商品詳細画面にアクセスしたユーザーが出品者である' %> 
-        <%# <% if  current_user == @item.user_id %> 
-        <%= link_to "商品の編集", "#", method: :get, class: "item-red-btn" %>
+        <%# <% if '商品詳細画面にアクセスしたユーザーが出品者である' %>  
+        <%= link_to "商品の編集", edit_item_path(@item), method: :get, class: "item-red-btn" %>
         <p class="or-text">or</p>
         <%= link_to "削除", "#", method: :delete, class:"item-destroy" %>
       <% else %>
@@ -49,7 +48,6 @@
     <table class="detail-table">
       <tbody>
         <tr>
-          <%# @item.nickname.user_id %>
           <th class="detail-item">出品者</th>
           <td class="detail-value"><%= @item.user.nickname %></td>
         </tr>
