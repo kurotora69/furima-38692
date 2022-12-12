@@ -1,2 +1,3 @@
 class UsersAddress < ApplicationRecord
+
 end
