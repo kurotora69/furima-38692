@@ -5,14 +5,14 @@ class Order
   with_options presence: true do
     validates :user
     validates :item
-    validates :post_code
+    validates :post_code,     format: { with: /^[0-9]{3}-[0-9]{4}$/ }
     validates :prefecture_id, numericality: { other_than: 1, message: "can't be blank" }
     validates :city
     validates :address
-    validates :tel
-    validates :building
+    validates :tel,           format: { with: /^0\d{9,10}$/ }
     validates :users_item
   end  
+  validates :building
 
   def save
     UsersAddress.create()
