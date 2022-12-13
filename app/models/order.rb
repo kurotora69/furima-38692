@@ -14,9 +14,9 @@ class Order
   end  
   validates :building
 
-  def save
-    UsersAddress.create()
-    UsersItem.create()
-  end 
+  # def save
+  #   UsersAddress.create(users_address: )
+  #   UsersItem.create()
+  # end 
 end  
 
