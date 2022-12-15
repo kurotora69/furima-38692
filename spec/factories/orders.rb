@@ -1,6 +1,5 @@
 FactoryBot.define do
-  factory :users_address do
-  
+  factory :order do
     post_code      { '123-4567' }
     prefecture_id  { 2 }
     city           { '浜市' }
@@ -9,7 +8,5 @@ FactoryBot.define do
     building       { 'コーポ' }
     user_id        { 1 }
     item_id        { 1 }
-   
   end
 end
-
