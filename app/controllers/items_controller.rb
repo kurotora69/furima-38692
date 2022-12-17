@@ -21,6 +21,7 @@ class ItemsController < ApplicationController
   end
 
   def show
+    # @order = UsersItem.create(order_params)
   end
 
   def edit
@@ -55,4 +56,9 @@ class ItemsController < ApplicationController
   def set_item
     @item = Item.find(params[:id])
   end
+
+  # def order_params
+  #   params.permit(:user_item).merge(user_id: current_user.id, item_id: params[:item_id])
+  # end
+
 end
