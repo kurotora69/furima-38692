@@ -22,12 +22,6 @@ class ItemsController < ApplicationController
   end
 
   def show
-    # @item = Item.find(params[:id])
-    # if @item.users_item.present?
-    #   redirect_to root_path
-    # else
-    #   render :show
-    # end    
     
   end
 
