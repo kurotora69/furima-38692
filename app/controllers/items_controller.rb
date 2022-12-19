@@ -5,6 +5,7 @@ class ItemsController < ApplicationController
 
   def index
     @items = Item.all.order('created_at DESC')
+    
   end
 
   def new
@@ -21,9 +22,15 @@ class ItemsController < ApplicationController
   end
 
   def show
+    
   end
 
   def edit
+    if @item.users_item.present?
+      redirect_to root_path
+    else
+      render :edit
+    end  
   end
 
   def update
@@ -55,4 +62,6 @@ class ItemsController < ApplicationController
   def set_item
     @item = Item.find(params[:id])
   end
+
+
 end
