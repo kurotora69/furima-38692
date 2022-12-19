@@ -1,7 +1,7 @@
 class OrdersController < ApplicationController
-  before_action :authenticate_user!, only: [:index, :create, :new]
-  before_action :set_order, only: [:index,:new, :create, :move_to_index]
-  before_action :move_to_index,  only: [ :new, :create, :index]
+  before_action :authenticate_user!, only: [:index, :create ]
+  before_action :set_order, only: [:index, :create ]
+  before_action :move_to_index,  only: [:create, :index]
 
 
   def index
@@ -13,9 +13,6 @@ class OrdersController < ApplicationController
     end  
   end
 
-  def new
-    @order = Order.new(order_params)
-  end 
   
   def create
     @order = Order.new(order_params)
