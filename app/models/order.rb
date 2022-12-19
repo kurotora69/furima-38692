@@ -15,6 +15,7 @@ class Order
   # validate :building validates :users_item
 
   def save
+    # binding.pry
     users_item = UsersItem.create(user_id: user_id, item_id: item_id)
     UsersAddress.create(users_item_id: users_item_id,  post_code: post_code, prefecture_id: prefecture_id, city: city, address: address, building: building, tel: tel, users_item_id: users_item.id)
     # price: price,

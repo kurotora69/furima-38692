@@ -5,6 +5,7 @@ class ItemsController < ApplicationController
 
   def index
     @items = Item.all.order('created_at DESC')
+    
   end
 
   def new
@@ -21,10 +22,21 @@ class ItemsController < ApplicationController
   end
 
   def show
-    # @order = UsersItem.create(order_params)
+    # @item = Item.find(params[:id])
+    # if @item.users_item.present?
+    #   redirect_to root_path
+    # else
+    #   render :show
+    # end    
+    
   end
 
   def edit
+    if @item.users_item.present?
+      redirect_to root_path
+    else
+      render :edit
+    end  
   end
 
   def update
@@ -57,8 +69,5 @@ class ItemsController < ApplicationController
     @item = Item.find(params[:id])
   end
 
-  # def order_params
-  #   params.permit(:user_item).merge(user_id: current_user.id, item_id: params[:item_id])
-  # end
 
 end

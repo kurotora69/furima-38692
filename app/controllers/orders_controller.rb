@@ -1,10 +1,16 @@
 class OrdersController < ApplicationController
-  before_action :authenticate_user!, except: :index
-  before_action :move_to_index,  only: [:index]
+  before_action :authenticate_user!, only: [:index, :create, :new]
+  before_action :move_to_index,  only: [ :new, :create, :index]
+  # except: :index
 
   def index
     @item = Item.find(params[:item_id])
     @order = Order.new
+    if @item.users_item.present?
+      redirect_to root_path
+    else
+      render :index
+    end  
   end
 
   def new
@@ -43,10 +49,11 @@ class OrdersController < ApplicationController
  
 
   def move_to_index
-    unless current_user.id =! @order
+    @item = Item.find(params[:item_id])
+    if current_user.id == @item.user.id
       redirect_to root_path
     end
-  end
+  end  
 
 end
 
