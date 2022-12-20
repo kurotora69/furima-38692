@@ -131,7 +131,7 @@
         <li class='list'> 
           <%= link_to item_path(item),  method: :get do %> 
           <div class='item-img-content'>
-            <%= link_to image_tag(item.image.variant(resize: '200x300'), class: "item_img" ), item_path(item) %>
+            <%= image_tag item.image.variant(resize: '200x300'), class: "item_img" %>
 
             <% if item.users_item.present? %> 
               <div class='sold-out'>
